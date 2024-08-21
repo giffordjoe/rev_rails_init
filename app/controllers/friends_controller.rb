@@ -17,6 +17,7 @@ class FriendsController < ApplicationController
 
   # GET /friends/1/edit
   def edit
+    # debugger
   end
 
   # POST /friends or /friends.json

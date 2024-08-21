@@ -20,9 +20,8 @@ class GiftsController < ApplicationController
   end
 
   # POST /gifts or /gifts.json
-  def create
+  def create    
     @gift = Gift.new(gift_params)
-
     respond_to do |format|
       if @gift.save
         format.html { redirect_to gift_url(@gift), notice: "Gift was successfully created." }

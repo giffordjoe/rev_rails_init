@@ -4,10 +4,7 @@
 
 <div id="friends">
   <% @friends.each do |friend| %>
-    <%= render friend %>
-    <p>
-      <%= link_to "Show this friend", friend %>
-    </p>
+    <%= link_to render(friend), friend %>
   <% end %>
 </div>
 
