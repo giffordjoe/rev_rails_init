@@ -24,27 +24,34 @@
 
 
 <h2>Gifts</h2>
+  <div data-controller="gift">
+    <table>
+      <thead>
+        <tr>
+          <th>Gift Name</th>
+          <th>Price</th>
+          <th>Link</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody data-gift-target="container">
+        <%= form.fields_for :gifts do |gift_form| %>
+          <%= render partial: 'gift_fields', locals: { f: gift_form } %>
+        <% end %>
+      </tbody>
+    </table>
 
-<div id="gifts">
-<table>
-  <tr>
-    <td>Name</td>
-    <td>Price</td>
-    <td>URL</td>
-  </tr>
-  <% @friend.gifts.each do |gift| %>
-    <tr>
-       <%= render :partial => 'gifts/form', :locals => {:gift => gift} %>
-      <td> <%= link_to "See gift", gift_path(gift) %> </td>
-    </tr>
-  <% end %>
-</table>
-<%= button_to "Add Gift", new_gift_path, params: {friend_id: @friend.id}, :method => :get %>
+    <a href="#" data-action="click->gift#addGift">Add Gift</a>
 
-</div>
+    <!-- Hidden template for new gift fields -->
+    <template data-gift-target="template">
+      <%= form.fields_for :gifts, Gift.new, child_index: 'NEW_RECORD' do |gift| %>
+        <%= render partial: 'gift_fields', locals: { f: gift } %>
+      <% end %>
+    </template>
+  </div>
 
-
-  <div>
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>

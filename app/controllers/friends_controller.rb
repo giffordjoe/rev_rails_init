@@ -13,6 +13,7 @@ class FriendsController < ApplicationController
   # GET /friends/new
   def new
     @friend = Friend.new
+    @friend.gifts.build # build an initial gift to display the first set of fields
   end
 
   # GET /friends/1/edit
@@ -66,6 +67,6 @@ class FriendsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friend_params
-      params.require(:friend).permit(:first_name, :last_name, :birth_date)
+      params.require(:friend).permit(:first_name, :last_name, :birth_date, gifts_attributes: [:id, :name, :price, :link, :_destroy])
     end
 end

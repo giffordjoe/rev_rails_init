@@ -1,10 +1,34 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @friend %>
+
+ <%= render @friend %> 
+
+
+<h2>Gift Ideas</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Gift Name</th>
+      <th>Price</th>
+      <th>URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @friend.gifts.each do |gift| %>
+      <tr>
+        <td><%= gift.name %></td>
+        <td><%= number_to_currency(gift.price) if gift.price.present? %></td>
+        <td><%= link_to 'View', gift.url, target: '_blank' if gift.url.present? %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Add New Gift', edit_friend_path(@friend) %>
 
 <div>
   <%= link_to "Edit this friend", edit_friend_path(@friend) %> |
   <%= link_to "Back to friends", friends_path %>
-
   <%= button_to "Destroy this friend", @friend, method: :delete %>
 </div>
